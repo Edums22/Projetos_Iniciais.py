@@ -1,0 +1,93 @@
+# Aplicação simples de cadastro de usuários
+# Os dados são armazenados em memória (lista)
+
+# Lista que armazenará os usuários
+usuarios = []
+
+
+def cadastrar_usuario():
+    """
+    Função responsável por cadastrar um novo usuário
+    """
+    print("\n--- Cadastro de Usuário ---")
+    
+    nome = input("Digite o nome: ")
+    email = input("Digite o e-mail: ")
+    idade = input("Digite a idade: ")
+
+    # Cria um dicionário representando o usuário
+    usuario = {
+        "nome": nome,
+        "email": email,
+        "idade": idade
+    }
+
+    # Adiciona o usuário à lista
+    usuarios.append(usuario)
+    print("Usuário cadastrado com sucesso!\n")
+
+
+def listar_usuarios():
+    """
+    Função responsável por listar todos os usuários cadastrados
+    """
+    print("\n--- Lista de Usuários ---")
+
+    if not usuarios:
+        print("Nenhum usuário cadastrado.\n")
+        return
+
+    for i, usuario in enumerate(usuarios, start=1):
+        print(f"Usuário {i}:")
+        print(f"Nome: {usuario['nome']}")
+        print(f"E-mail: {usuario['email']}")
+        print(f"Idade: {usuario['idade']}")
+        print("-" * 20)
+
+
+def buscar_usuario():
+    """
+    Função responsável por buscar um usuário pelo nome
+    """
+    print("\n--- Buscar Usuário ---")
+    nome_busca = input("Digite o nome do usuário: ")
+
+    for usuario in usuarios:
+        if usuario["nome"].lower() == nome_busca.lower():
+            print("\nUsuário encontrado:")
+            print(f"Nome: {usuario['nome']}")
+            print(f"E-mail: {usuario['email']}")
+            print(f"Idade: {usuario['idade']}\n")
+            return
+
+    print("Usuário não encontrado.\n")
+
+
+def menu():
+    """
+    Função que exibe o menu principal da aplicação
+    """
+    while True:
+        print("=== Menu ===")
+        print("1 - Cadastrar usuário")
+        print("2 - Listar usuários")
+        print("3 - Buscar usuário")
+        print("4 - Sair")
+
+        opcao = input("Escolha uma opção: ")
+
+        if opcao == "1":
+            cadastrar_usuario()
+        elif opcao == "2":
+            listar_usuarios()
+        elif opcao == "3":
+            buscar_usuario()
+        elif opcao == "4":
+            print("Encerrando a aplicação...")
+            break
+        else:
+            print("Opção inválida. Tente novamente.\n")
+
+
+# Ponto de entrada da aplicação
+menu()
